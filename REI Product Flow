@@ -1,0 +1,10 @@
+setEventName Navigate
+navigate https://www.rei.com/
+setEventName Click
+execAndWait document.querySelector("#headerWrapper > section > section > section > div.masthead__right > ul > li.actions__item.toggle-mobile-menu > button.icon-button.open-button.icon-button__text.icon-button__text--flatten.flatten-sr-only > svg > use").click();
+setEventName Click
+execAndWait document.querySelector("#secondary-nav > div.secondary-navigation__middle > div > ul > li:nth-child(3) > button").click();
+setEventName Click
+execAndWait document.querySelector("#mm-climbing > li:nth-child(3) > ul > li:nth-child(2) > a").click();
+setEventName Click
+execAndWait document.querySelector("#image-163240-0").click();
