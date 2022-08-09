@@ -38,7 +38,7 @@ After you are done with the recording
 <h3>#Run Webpagetest test using script</h3>
 
 - Open https://www.webpagetest.org
-- Scroll down to custom script section
+- Scroll down to custom script section and paste your WPT script.
 
 ![Run Script](/assets/images/script.png)
 
