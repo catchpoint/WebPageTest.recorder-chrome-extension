@@ -5,8 +5,17 @@
 
 An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script.
 
-Download your WPT RECORDER EXTENSION using [this](https://chrome.google.com/webstore/category/extensions) link.
+Download your WPT RECORDER EXTENSION using [this](https://chrome.google.com/webstore/detail/webpagetest-recorder-exte/eklpnjohdjknellndlnepihjnhpaimok) link. 
 
+![How to use the recorder extension](/assets/video/export-extension.gif)
+
+---
+
+**NOTE**
+- This extension is only compatible with Chrome v104 and above.
+- Before exporting the script, ensure your recording plays back correctly in Chrome (to obtain the expected result).
+  
+---
 ## Generate your script using extension
 
 <h3>#Open the Recorder panel</h3>
