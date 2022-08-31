@@ -40,6 +40,9 @@ let convert = function (flow) {
       return false;
     }
   }
+  function addViewport(step) {
+    wptScript += `setViewportSize ${step.width} ${step.height}\n`;
+  }
   function addNavigate(url) {
     wptScript += "setEventName Navigate\n";
     wptScript += "navigate " + url + "\n";
@@ -102,6 +105,9 @@ let convert = function (flow) {
   }
   function addScriptLine(step) {
     switch (step.type) {
+      case "setViewport":
+        addViewport(step);
+        break;
       case "navigate":
         addNavigate(step.url);
         break;
