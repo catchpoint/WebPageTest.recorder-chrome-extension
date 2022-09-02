@@ -62,6 +62,10 @@ Now you have successfully generated a Webpagetest Custom Script using WEBPAGETES
 - `change` (maps to `execAndWait`)
 - `keydown` (maps to `execAndWait`)
 - `keyup` (maps to `execAndWait`)
+- `waitForElement` (maps to `waitFor`)
+- `waitForExpression` (maps to `waitFor`)
+- `doubleClick` (maps to `execAndWait`)
+- `scroll` (maps to `execAndWait`)
 
 ## Resources
 - [Sample exported script](/REI%20Product%20Flow)
