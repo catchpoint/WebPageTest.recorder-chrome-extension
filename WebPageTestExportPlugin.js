@@ -32,62 +32,45 @@ let convert = function (flow) {
 
   let isKeyDown = false;
 
-  //first, is it a valid step?
-  function isValid(stepType) {
-    if (stepMap[stepType]) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   function addViewport(step) {
     wptScript += `setViewportSize ${step.width} ${step.height}\n`;
   }
+
   function addNavigate(url) {
     wptScript += "setEventName Navigate\n";
     wptScript += "navigate " + url + "\n";
   }
+
   function addClick(selectors) {
     wptScript += "setEventName Click\n";
     //for now, let's skip any aria/ until we figure somethign out there
-    for (let index = 0; index < selectors.length; index++) {
-      const selector = selectors[index];
+    selectors.forEach((selector) => {
       if (!selector[0].startsWith("aria/")) {
-        wptScript +=
-          'execAndWait document.querySelector("' + selector + '").click();\n';
-        break;
+        wptScript += 'execAndWait document.querySelector("' + selector + '").click();\n';
       }
-    }
+    });
   }
+
   function addChange(selectors, value) {
     if (isKeyDown) {
       wptScript += "setEventName KeyDown\n";
-
-      for (let index = 0; index < selectors.length; index++) {
-        const selector = selectors[index];
+      selectors.forEach((selector) => {
         if (!selector[0].startsWith("aria/")) {
-          wptScript +=
-            'execAndWait document.querySelector("' + selector + '").click();\n';
-          break;
+          wptScript += 'execAndWait document.querySelector("' + selector + '").click();\n';
         }
-      }
+      });
     } else {
       wptScript += "setEventName Change\n";
       //for now, let's skip any aria/ until we figure somethign out there
-      for (let index = 0; index < selectors.length; index++) {
-        const selector = selectors[index];
+      selectors.forEach((selector) => {
         if (!selector[0].startsWith("aria/")) {
           wptScript +=
-            'execAndWait document.querySelector("' +
-            selector +
-            '").value = "' +
-            value +
-            '";\n';
-          break;
+            'execAndWait document.querySelector("' + selector + '").value = "' + value + '";\n';
         }
-      }
+      });
     }
   }
+
   function addKeyDown(assertedEvents) {
     //Because some keydown events are returning url's as assertedEvents
     if (assertedEvents) {
@@ -100,9 +83,38 @@ let convert = function (flow) {
       isKeyDown = true;
     }
   }
+
   function addKeyUp() {
     isKeyDown = false;
   }
+
+  function addWaitForElement(selectors) {
+    selectors.forEach((selector) => {
+      wptScript += "setEventName WaitForElement\n";
+      wptScript += `waitFor document.querySelector("${selector}")\n`;
+    });
+  }
+
+  function addWaitFor(step) {
+    wptScript += "setEventName WaitForExpression\n";
+    wptScript += "waitFor " + step.expression + "\n";
+  }
+
+  function doubleClick(selectors) {
+    wptScript += "setEventName doubleClick\n";
+    //for now, let's skip any aria/ until we figure somethign out there
+    selectors.forEach((selector) => {
+      if (!selector[0].startsWith("aria/")) {
+        wptScript += `execAndWait document.querySelector('${selector}').dispatchEvent(new MouseEvent('dblclick'))\n`;
+      }
+    });
+  }
+
+  function scroll(step) {
+    wptScript += "setEventName Scroll\n";
+    wptScript += `execAndWait window.scrollBy(${step.x},${step.y})\n`;
+  }
+
   function addScriptLine(step) {
     switch (step.type) {
       case "setViewport":
@@ -122,6 +134,18 @@ let convert = function (flow) {
         break;
       case "keyUp":
         addKeyUp();
+        break;
+      case "waitForElement":
+        addWaitForElement(step.selectors);
+        break;
+      case "waitForExpression":
+        addWaitFor(step);
+        break;
+      case "doubleClick":
+        doubleClick(step.selectors);
+        break;
+      case "scroll":
+        scroll(step);
         break;
     }
   }
