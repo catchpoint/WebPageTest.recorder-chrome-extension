@@ -45,7 +45,7 @@ let convert = function (flow) {
     wptScript += "setEventName Click\n";
     //for now, let's skip any aria/ until we figure somethign out there
     selectors.forEach((selector) => {
-      if (!selector[0].startsWith("aria/")) {
+      if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
         wptScript += 'execAndWait document.querySelector("' + selector + '").click();\n';
       }
     });
@@ -55,7 +55,7 @@ let convert = function (flow) {
     if (isKeyDown) {
       wptScript += "setEventName KeyDown\n";
       selectors.forEach((selector) => {
-        if (!selector[0].startsWith("aria/")) {
+        if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
           wptScript += 'execAndWait document.querySelector("' + selector + '").click();\n';
         }
       });
@@ -63,9 +63,8 @@ let convert = function (flow) {
       wptScript += "setEventName Change\n";
       //for now, let's skip any aria/ until we figure somethign out there
       selectors.forEach((selector) => {
-        if (!selector[0].startsWith("aria/")) {
-          wptScript +=
-            'execAndWait document.querySelector("' + selector + '").value = "' + value + '";\n';
+        if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
+          wptScript += 'execAndWait document.querySelector("' + selector + '").value = "' + value + '";\n';
         }
       });
     }
@@ -104,7 +103,7 @@ let convert = function (flow) {
     wptScript += "setEventName doubleClick\n";
     //for now, let's skip any aria/ until we figure somethign out there
     selectors.forEach((selector) => {
-      if (!selector[0].startsWith("aria/")) {
+      if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
         wptScript += `execAndWait document.querySelector('${selector}').dispatchEvent(new MouseEvent('dblclick'))\n`;
       }
     });
