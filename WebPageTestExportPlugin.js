@@ -64,7 +64,9 @@ let convert = function (flow) {
       //for now, let's skip any aria/ until we figure somethign out there
       selectors.forEach((selector) => {
         if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
-          wptScript += 'execAndWait document.querySelector("' + selector + '").value = "' + value + '";\n';
+          //wptScript += 'execAndWait document.querySelector("' + selector + '").value = "' + value + '";\n';
+          // This will also handle React's Synthetic Event Listeners
+          wptScript += `execAndWait el = document.querySelector('${selector}'); proto = Object.getPrototypeOf(el); set = Object.getOwnPropertyDescriptor(proto, 'value').set; set.call(el, '${value}'); el.dispatchEvent(new Event('input', { bubbles: true }))\n`;
         }
       });
     }

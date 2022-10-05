@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.0.5",
+  "version": "1.0.0",
   "name": "WebPageTest Recorder Extension",
   "description": "An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script",
   "permissions": [],
