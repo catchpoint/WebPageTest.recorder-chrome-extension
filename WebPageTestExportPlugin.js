@@ -151,9 +151,13 @@ let convert = function (flow) {
     }
   }
 
-  flow.steps.forEach((step) => {
-    addScriptLine(step);
-  });
+  if (flow.steps) {
+    flow.steps.forEach((step) => {
+      addScriptLine(step);
+    });
+  } else {
+    addScriptLine(flow);
+  }
 
   return wptScript;
 };
