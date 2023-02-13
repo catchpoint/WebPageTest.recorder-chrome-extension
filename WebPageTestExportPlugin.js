@@ -12,11 +12,13 @@ export class RecorderPlugin {
 /*------------------------*/
 
 /* eslint-disable no-undef */
-chrome.devtools.recorder.registerRecorderExtensionPlugin(
-  new RecorderPlugin(),
-  /* name=*/ "WebPageTest custom",
-  /* mediaType=*/ "text/plain"
-);
+if (chrome.devtools) {
+  chrome.devtools.recorder.registerRecorderExtensionPlugin(
+    new RecorderPlugin(),
+    /* name=*/ "WebPageTest custom",
+    /* mediaType=*/ "text/plain"
+  );
+}
 
 async function WPTStringifyChromeRecording(recording) {
   if (recording.length === 0) {
