@@ -94,7 +94,12 @@ class WPTChromeExtension extends StringifyExtension {
       out.appendLine("setEventName Click");
       //for now, let's skip any aria/ until we figure somethign out there
       selectors.forEach((selector) => {
-        if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
+        if (
+          !selector[0].startsWith("aria/") &&
+          !selector[0].startsWith("xpath/") &&
+          !selector[0].startsWith("text/") &&
+          !selector[0].startsWith("pierce/")
+        ) {
           out.appendLine('execAndWait document.querySelector("' + selector + '").click();');
         }
       });
@@ -107,7 +112,8 @@ class WPTChromeExtension extends StringifyExtension {
           if (
             !selector[0].startsWith("aria/") &&
             !selector[0].startsWith("xpath/") &&
-            !selector[0].startsWith("text/")
+            !selector[0].startsWith("text/") &&
+            !selector[0].startsWith("pierce/")
           ) {
             out.appendLine('execAndWait document.querySelector("' + selector + '").click();');
           }
@@ -119,7 +125,8 @@ class WPTChromeExtension extends StringifyExtension {
           if (
             !selector[0].startsWith("aria/") &&
             !selector[0].startsWith("xpath/") &&
-            !selector[0].startsWith("text/")
+            !selector[0].startsWith("text/") &&
+            !selector[0].startsWith("pierce/")
           ) {
             //out.appendLine('execAndWait document.querySelector("' + selector + '").value = "' + value + '";';
             // This will also handle React's Synthetic Event Listeners
@@ -164,7 +171,12 @@ class WPTChromeExtension extends StringifyExtension {
       out.appendLine("setEventName doubleClick");
       //for now, let's skip any aria/ until we figure somethign out there
       selectors.forEach((selector) => {
-        if (!selector[0].startsWith("aria/") && !selector[0].startsWith("xpath/") && !selector[0].startsWith("text/")) {
+        if (
+          !selector[0].startsWith("aria/") &&
+          !selector[0].startsWith("xpath/") &&
+          !selector[0].startsWith("text/") &&
+          !selector[0].startsWith("pierce/")
+        ) {
           out.appendLine(`execAndWait document.querySelector('${selector}').dispatchEvent(new MouseEvent('dblclick'))`);
         }
       });
