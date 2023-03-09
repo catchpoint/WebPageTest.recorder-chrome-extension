@@ -1,11 +1,12 @@
-<p align="center"><img src="https://docs.webpagetest.org/img/wpt-navy-logo.png" alt="WebPageTest Logo" /></p>
-
+<p align="center"><img width="80%" alt="WebPageTest Logo" src="assets/images/banner.png"></p>
 
 # WEBPAGETEST RECORDER EXTENSION
 
-An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script.
+### An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script.
 
-Download your WPT RECORDER EXTENSION using [this](https://chrome.google.com/webstore/detail/webpagetest-recorder-exte/eklpnjohdjknellndlnepihjnhpaimok) link. 
+### Download [WPT RECORDER EXTENSION](https://chrome.google.com/webstore/detail/webpagetest-recorder-exte/eklpnjohdjknellndlnepihjnhpaimok) using `Add to Chrome` button. 
+
+#
 
 ![How to use the recorder extension](/assets/video/export-extension.gif)
 
@@ -18,14 +19,14 @@ Download your WPT RECORDER EXTENSION using [this](https://chrome.google.com/webs
 ---
 ## Generate your script using extension
 
-<h3>#Open the Recorder panel</h3>
+<h3>1. Open the Recorder panel</h3>
 
 - Open DevTools.
 - Click on More options --> More tools > Recorder.
 
 ![Open Recorder](/assets/images/open_dev-1.png)
 
-<h3>#Start a new recording</h3>
+<h3>2. Start a new recording</h3>
 
 - Enter recording name.
 - Click on start recording button.
@@ -36,7 +37,7 @@ Download your WPT RECORDER EXTENSION using [this](https://chrome.google.com/webs
 
 Refer to this link: https://developer.chrome.com/docs/devtools/recorder/ to learn more about Chrome Recorder
 
-<h3>#Export your script</h3>
+<h3>3. Export your script</h3>
 
 After you are done with the recording
 
@@ -44,7 +45,7 @@ After you are done with the recording
 
 ![Export Script](/assets/images/export.png)
 
-<h3>#Run Webpagetest test using script</h3>
+<h3>4. Run Webpagetest test using script</h3>
 
 - Open https://www.webpagetest.org
 - Scroll down to custom script section and paste your WPT script.
@@ -55,9 +56,18 @@ After you are done with the recording
 
 Now you have successfully generated a Webpagetest Custom Script using WEBPAGETEST RECORDER EXTENSION and Run a Webpagetest Test. Play around with the extension and have fun.
 
+## Testing
+
+1. Clone the repo, run `npm run build`
+2. Visit chrome://extensions
+3. Enable "Developer mode" via toggle switch in upper right corner
+4. Click "Load unpacked" button in upper left corner
+5. Select the `build` directory produced by `npm run build`
+
 ## Currently Supported Recorder Commands
 
 - `navigate` (maps to `navigate`)
+- `setViewport` (maps to `setViewportSize`)
 - `click` (maps to `execAndWait`)
 - `change` (maps to `execAndWait`)
 - `keydown` (maps to `execAndWait`)
