@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "1.0.3",
+  "version": "1.1.0",
   "name": "WebPageTest Recorder Extension",
   "description": "An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script",
   "permissions": [],
@@ -13,10 +13,10 @@
     "default_title": "WebPageTest Recorder Extention"
   },
   "icons": {
-    "16": "icon16.png",
-    "32": "icon32.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
   },
   "minimum_chrome_version": "104.0.0.0"
 }
