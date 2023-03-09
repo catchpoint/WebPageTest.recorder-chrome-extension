@@ -1,11 +1,14 @@
 {
   "name": "webpagetest-export-extension",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@puppeteer/replay": "^2.9.0"
+  }
 }
