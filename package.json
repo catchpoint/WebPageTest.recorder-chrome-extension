@@ -1,14 +1,32 @@
 {
-  "name": "webpagetest-export-extension",
-  "version": "1.0.3",
+  "name": "webpagetest-recorder-extension",
+  "version": "1.1.0",
   "description": "An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "preprocessExtension.sh && rollup --config rollup.config.js"
   },
-  "author": "",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebPageTest/recorder-to-webpagetest-chrome-extension.git"
+  },
+  "author": "Siddhant Shukla <developer@webpagetest.com>",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebPageTest/recorder-to-webpagetest-chrome-extension/issues"
+  },
+  "keywords": [
+    "webpagetest",
+    "multistep",
+    "automation",
+    "testing",
+    "performance"
+  ],
+  "homepage": "https://github.com/WebPageTest/recorder-to-webpagetest-chrome-extension#readme",
   "dependencies": {
-    "@puppeteer/replay": "^2.9.0"
+    "webpagetest-chrome-recorder": "^1.7.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1"
   }
 }
