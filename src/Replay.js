@@ -8,6 +8,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   main();
 });
 
+function startSpinner() {
+  document.getElementById("GO").classList.add("rotate");
+}
+
+function stopSpinner() {
+  document.getElementById("GO").classList.remove("rotate");
+}
+
+function showAlert() {
+  document.querySelector(".alertBox").style.display = "block";
+}
+
+function hideAlert() {
+  document.querySelector(".alertBox").style.display = "none";
+}
+
 const initHTML = document.body.innerHTML;
 let testResults;
 let testId;
@@ -18,7 +34,7 @@ async function main() {
   //encoding recording
   recording = encodeURIComponent(recording);
 
-  // Dummy auth flow. Please use the best practices for authenticating users.
+  // Dummy auth flow for testing purposes.
   const token = localStorage.getItem("token");
   if (!token) {
     document.body.innerHTML = `
@@ -48,7 +64,13 @@ async function main() {
 
       .heading {
         color: white;
+        margin-bottom: 30px;
       }
+  
+      .wptheader_logo {
+        width: 20vw;
+      }
+      
 
       .subhead {
         color: white;
@@ -73,7 +95,7 @@ async function main() {
         box-sizing: border-box;
         border-radius: 2rem;
         margin-top: 0;
-        font-size: 1em;
+        font-size: 1.4em;
         padding: 20px 30px;
         box-shadow: inset 0 0 5px #000;
       }
@@ -114,15 +136,62 @@ async function main() {
           transform: rotate(359deg);
         }
       }
+      .alertBox {
+        margin-top: -15px;
+        display: none;
+      }
+  
+      .alert {
+        position: relative;
+        top: 10;
+        left: 0;
+        width: auto;
+        height: auto;
+        padding: 10px;
+        margin: 10px;
+        line-height: 1.8;
+        border-radius: 5px;
+        cursor: hand;
+        cursor: pointer;
+        font-family: sans-serif;
+        font-weight: 400;
+      }
+  
+      .alertCheckbox {
+        display: none;
+      }
+  
+      .alertText {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 16px;
+      }
+  
+      .error {
+        background-color: #fee;
+        border: 1px solid #edd;
+        color: #a66;
+      }
     </style>
   </head>
   <body>
     <div class="main">
-      <div class="heading"><h1>ENTER WEBPAGETEST API KEY</h1></div>
+      <div class="heading">
+        <a class="wptheader" href="https://www.webpagetest.org" target="_blank">
+          <img class="wptheader_logo" src="/assets/wpt-logo.svg" alt="WebPageTest by Catchpoint: Recorder UI" />
+        </a>
+      </div>
       <form>
-        <input class="input_api" type="password" name="apiKey" id="apikey" required="true" />
+        <input class="input_api" type="password" name="apiKey" id="apikey" placeholder="Enter webpagetest API KEY..." required="true" />
         <button type="submit" class="input_submit" id="GO">GO</button>
       </form>
+      <label class="alertBox">
+      <input type="checkbox" class="alertCheckbox" autocomplete="off" />
+        <div class="alert error">
+          <span class="alertText">API Key Invalid OR Expired</span>
+        </div>
+      </label>
       <div class="subhead">
         <h3>
           Don't have one? Get it from
@@ -133,20 +202,17 @@ async function main() {
   </body>
         `;
 
-    document.getElementById("GO").addEventListener("click", () => {
-      document.getElementById("GO").classList.add("rotate");
-    });
-
     document.querySelector("form").onsubmit = (event) => {
       event.preventDefault();
 
       const apikey = document.getElementById("apikey").value;
 
-      console.log("Webpagetest Custom Script Test Result: \n");
+      startSpinner();
+      hideAlert();
 
       //Correct URI
       const url = `https://www.webpagetest.org/runtest.php?f=json&label=Recorder&nbsp;Extention&script=${recording}&fvonly=1&k=${apikey}`;
-      const sampleUrl = `https://api.chucknorris.io/jokes/random`;
+      //const sampleUrl = `https://api.chucknorris.io/jokes/random`;
 
       (async () => {
         try {
@@ -160,9 +226,8 @@ async function main() {
           }
           main();
         } catch (err) {
-          document.getElementById("GO").classList.remove("rotate");
-
-          alert("API key ivalid/expired");
+          stopSpinner();
+          showAlert();
         }
       })();
     };
