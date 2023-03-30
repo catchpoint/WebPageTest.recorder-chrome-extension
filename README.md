@@ -10,6 +10,12 @@ Download [WPT RECORDER EXTENSION](https://chrome.google.com/webstore/detail/webp
 
 ![How to use the recorder extension](/assets/video/export-extension.gif)
 
+### Support for Replay UI (Beta)
+
+Now you can directly replay your recording using Webpagetest (Chrome 112 onwards)
+
+![How to use the recorder replay UI](/assets/video/replay-ui.gif)
+
 ---
 
 **NOTE**
