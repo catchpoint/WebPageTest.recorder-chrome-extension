@@ -300,7 +300,7 @@ async function main() {
       class="input_api"
       type="password"
       name="apiKey"
-      id="apikey"
+      id="apiKey"
       placeholder="Enter webpagetest API KEY..."
       required="true"
     />
@@ -392,7 +392,7 @@ async function main() {
     document.querySelector("form").onsubmit = (event) => {
       event.preventDefault();
 
-      const apikey = document.getElementById("apikey").value;
+      const apiKey = document.getElementById("apiKey").value;
       const location = document.getElementById("location").value;
       const connectivity = document.getElementById("connectivity").value;
       const runs = document.getElementById("runs").value;
@@ -400,15 +400,19 @@ async function main() {
       showSpinner();
       hideAlert();
 
-      //Correct URI
       const url = `https://www.webpagetest.org/runtest.php?f=json&label=Recorder&nbsp;Extention&script=${recording}&fvonly=${
         rvCheck ? 0 : 1
-      }&k=${apikey}&location=${location}.${connectivity}&runs=${runs}`;
-      //const sampleUrl = `https://api.chucknorris.io/jokes/random`;
+      }&location=${location}.${connectivity}&runs=${runs}`;
 
       (async () => {
         try {
-          const data = await fetch(url);
+          const data = await fetch(url, {
+            method: "POST",
+            headers: {
+              "X-WPT-API-KEY": apiKey,
+              "User-Agent": "WebpagetestRecorderExtension/v1.1.3",
+            },
+          });
           localStorage.setItem("token", "token");
 
           const testResults = await data.json();
