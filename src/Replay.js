@@ -383,10 +383,10 @@ async function main() {
 
     fetchLocations();
 
-    let rvCheck = false;
+    let fvCheck = false;
 
     document.querySelector("#repeatView").addEventListener("click", () => {
-      rvCheck = !rvCheck;
+      fvCheck = !fvCheck;
     });
 
     document.querySelector("form").onsubmit = (event) => {
@@ -401,7 +401,7 @@ async function main() {
       hideAlert();
 
       const url = `https://www.webpagetest.org/runtest.php?f=json&label=Recorder&nbsp;Extention&script=${recording}&fvonly=${
-        rvCheck ? 0 : 1
+        fvCheck ? 0 : 1
       }&location=${location}.${connectivity}&runs=${runs}`;
 
       (async () => {
