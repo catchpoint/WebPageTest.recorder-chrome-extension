@@ -1,6 +1,6 @@
 {
   "name": "webpagetest-recorder-extension",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "An extension for Chrome Recorder to export a recorder session as a WebPageTest Custom Script",
   "scripts": {
     "build": "node preprocessExtension && rollup --config rollup.config.js"
